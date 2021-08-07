@@ -13,33 +13,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 
-const val SCREEN_LOGIN = "login"
-const val SCREEN_LOGIN_SUCCESS = "login_success"
-
-fun NavGraphBuilder.addAuthNavGraph(
-    route: String,
-    navController: NavController,
-    onGoToDashboardClicked: () -> Unit
-) {
-    navigation(
-        route = route,
-        startDestination = SCREEN_LOGIN
-    ) {
-
-        composable(SCREEN_LOGIN) {
-            LogInScreen(
-                onLogInSuccess = {
-                    navController.navigate(SCREEN_LOGIN_SUCCESS)
-                }
-            )
-        }
-
-        composable(SCREEN_LOGIN_SUCCESS) {
-            LogInSuccessScreen(onGoToDashboardClicked)
-        }
-    }
-}
-
 @Composable
 fun LogInScreen(
     onLogInSuccess: () -> Unit
