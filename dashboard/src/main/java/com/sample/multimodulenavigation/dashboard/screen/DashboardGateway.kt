@@ -18,8 +18,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sample.multimodulenavigation.common.LeafScreen
-import com.sample.multimodulenavigation.common.Resource
+import com.sample.multimodulenavigation.commoncore.LeafScreen
+import com.sample.multimodulenavigation.commoncore.Resource
 import com.sample.multimodulenavigation.dashboard.Tab
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay

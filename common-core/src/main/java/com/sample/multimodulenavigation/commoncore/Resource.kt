@@ -1,4 +1,4 @@
-package com.sample.multimodulenavigation.common
+package com.sample.multimodulenavigation.commoncore
 
 /**
  * Created by theapache64 : Jul 26 Sun,2020 @ 13:22

@@ -1,7 +1,7 @@
 package com.sample.multimodulenavigation.dashboard
 
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.sample.multimodulenavigation.common.LeafScreen
+import com.sample.multimodulenavigation.commoncore.LeafScreen
 
 data class Tab(
     val id: String,

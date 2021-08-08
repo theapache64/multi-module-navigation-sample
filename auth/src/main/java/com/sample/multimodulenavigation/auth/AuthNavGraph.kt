@@ -4,8 +4,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.sample.multimodulenavigation.common.LeafScreen
-import com.sample.multimodulenavigation.common.Screen
+import com.sample.multimodulenavigation.commoncore.LeafScreen
+import com.sample.multimodulenavigation.commoncore.Screen
 
 fun NavGraphBuilder.addAuthNavGraph(
     route: String,

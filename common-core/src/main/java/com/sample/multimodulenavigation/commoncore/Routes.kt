@@ -1,4 +1,4 @@
-package com.sample.multimodulenavigation.common
+package com.sample.multimodulenavigation.commoncore
 
 sealed class Screen(val route: String) {
     object Splash : Screen("splash_root")

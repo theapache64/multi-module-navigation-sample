@@ -6,7 +6,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.sample.multimodulenavigation.common.LeafScreen
+import com.sample.multimodulenavigation.commoncore.LeafScreen
 import com.sample.multimodulenavigation.dashboard.DashboardBottomNavigation
 import com.sample.multimodulenavigation.dashboard.Tab
 import com.sample.multimodulenavigation.dashboard.findScreen

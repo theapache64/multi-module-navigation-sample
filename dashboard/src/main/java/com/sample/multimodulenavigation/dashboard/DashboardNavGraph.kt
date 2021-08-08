@@ -6,7 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.navigation
-import com.sample.multimodulenavigation.common.LeafScreen
+import com.sample.multimodulenavigation.commoncore.LeafScreen
 import com.sample.multimodulenavigation.dashboard.screen.*
 
 
