@@ -10,7 +10,7 @@ data class Tab(
 )
 
 
-fun Tab.findScreen(): LeafScreen {
+fun Tab.findLeafScreen(): LeafScreen {
     return when (id) {
         LeafScreen.Home.route -> LeafScreen.Home
         LeafScreen.Tv.route -> LeafScreen.Tv

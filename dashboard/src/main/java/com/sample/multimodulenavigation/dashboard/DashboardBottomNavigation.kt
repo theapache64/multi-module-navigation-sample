@@ -20,10 +20,10 @@ fun DashboardBottomNavigation(
             BottomNavigationItem(
                 selected = false, // TODO:
                 onClick = {
-                    val nextTab = tab.findScreen()
+                    val nextTab = tab.findLeafScreen()
                     tabSet.add(nextTab)
                     navController.navigate(nextTab.route) {
-                        popUpTo(tabs.first().findScreen().route) {
+                        popUpTo(tabs.first().findLeafScreen().route) {
                             saveState = true
                         }
 

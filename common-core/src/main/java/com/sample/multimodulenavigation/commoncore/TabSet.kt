@@ -5,10 +5,17 @@ class TabSet {
 
     fun add(tabScreen: LeafScreen) {
         tabs.remove(tabScreen) // remove if exist
-        tabs.add(tabScreen)
+        tabs.add(tabScreen) // add to the end
     }
 
-    fun remove(tabScreen: LeafScreen) {
-        tabs.remove(tabScreen)
+    fun remove(route: String) {
+        val index = tabs.indexOfFirst { it.route == route }
+        if (index != -1) {
+            tabs.removeAt(index)
+        }
+    }
+
+    fun lastOrNull(): LeafScreen? {
+        return tabs.lastOrNull()
     }
 }

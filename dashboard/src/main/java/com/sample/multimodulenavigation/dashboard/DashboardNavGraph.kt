@@ -35,7 +35,9 @@ fun NavGraphBuilder.addDashboardNavGraph(
                     onTabsLoaded(tabs)
 
                     // Go to first tab
-                    navController.navigate(tabs.first().findScreen().route) {
+                    val leafScreen = tabs.first().findLeafScreen()
+                    tabSet.add(leafScreen)
+                    navController.navigate(leafScreen.route) {
                         // remove up to gateway since we've data loaded
                         popUpTo(LeafScreen.DashboardGateway.route) { inclusive = true }
                     }

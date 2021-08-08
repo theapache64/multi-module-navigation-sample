@@ -9,9 +9,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.sample.multimodulenavigation.commoncore.LeafScreen
 import com.sample.multimodulenavigation.dashboard.DashboardBottomNavigation
 import com.sample.multimodulenavigation.dashboard.Tab
+import com.sample.multimodulenavigation.dashboard.findLeafScreen
+import com.sample.multimodulenavigation.dashboard.tabSet
 import com.sample.multimodulenavigation.ui.AppNavigation
 
 @Composable
@@ -25,7 +29,7 @@ fun MainScreen() {
         topBar = {
             if (isTabsVisible) {
                 IconButton(onClick = {
-                    val currentRoute = navController.currentBackStackEntry?.destination?.route
+                    navController.popBackStackSmart(tabs.first().findLeafScreen())
                 }) {
                     Icon(
                         imageVector = Icons.Outlined.ArrowBack, contentDescription = null
@@ -50,5 +54,32 @@ fun MainScreen() {
                 }
             )
         }
+    }
+}
+
+private fun NavHostController.popBackStackSmart(firstTab: LeafScreen) {
+    val currentRoute = currentBackStackEntry?.destination?.route
+    val isTab = when (currentRoute) {
+        LeafScreen.Home.route,
+        LeafScreen.Tv.route,
+        LeafScreen.Movies.route,
+        LeafScreen.Sports.route -> true
+        else -> false
+    }
+    if (isTab) {
+        tabSet.remove(currentRoute!!)
+        val navBackTo = tabSet.lastOrNull()
+        if (navBackTo != null) {
+            navigate(navBackTo.route) {
+                popUpTo(firstTab.route) {
+                    saveState = true
+                }
+
+                launchSingleTop = true
+                restoreState = true
+            }
+        }
+    } else {
+        popBackStack()
     }
 }
