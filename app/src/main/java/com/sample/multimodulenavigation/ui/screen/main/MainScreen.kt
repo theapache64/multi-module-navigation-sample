@@ -1,12 +1,10 @@
 package com.sample.multimodulenavigation.ui.screen.main
 
+import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -18,25 +16,27 @@ import com.sample.multimodulenavigation.dashboard.findLeafScreen
 import com.sample.multimodulenavigation.dashboard.tabSet
 import com.sample.multimodulenavigation.ui.AppNavigation
 
+const val TAG = "CustomLog"
+
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    onBackNavigation: () -> Unit // temporary way
+) {
     // States
     val navController = rememberNavController()
     var tabs by remember { mutableStateOf<List<Tab>>(listOf()) }
     var isTabsVisible by remember { mutableStateOf(false) }
 
+    navController.enableOnBackPressed(false)
+    BackHandler {
+        Log.d(TAG, "MainScreen: Back clicked")
+        if (!navController.popBackStackSmart(tabs.firstOrNull()?.findLeafScreen())) {
+            Log.d(TAG, "MainScreen: Navigation failed")
+            onBackNavigation()
+        }
+    }
+
     Scaffold(
-        topBar = {
-            if (isTabsVisible) {
-                IconButton(onClick = {
-                    navController.popBackStackSmart(tabs.first().findLeafScreen())
-                }) {
-                    Icon(
-                        imageVector = Icons.Outlined.ArrowBack, contentDescription = null
-                    )
-                }
-            }
-        },
         bottomBar = {
             if (isTabsVisible && tabs.isNotEmpty()) {
                 DashboardBottomNavigation(tabs = tabs, navController)
@@ -57,7 +57,11 @@ fun MainScreen() {
     }
 }
 
-private fun NavHostController.popBackStackSmart(firstTab: LeafScreen) {
+private fun NavHostController.popBackStackSmart(firstTab: LeafScreen?): Boolean {
+    if (firstTab == null) {
+        return false
+    }
+
     val currentRoute = currentBackStackEntry?.destination?.route
     val isTab = when (currentRoute) {
         LeafScreen.Home.route,
@@ -66,9 +70,12 @@ private fun NavHostController.popBackStackSmart(firstTab: LeafScreen) {
         LeafScreen.Sports.route -> true
         else -> false
     }
-    if (isTab) {
-        tabSet.remove(currentRoute!!)
-        val navBackTo = tabSet.lastOrNull()
+    return if (isTab) {
+        var navBackTo = tabSet.lastOrNull()
+        if (navBackTo?.route == currentRoute) {
+            tabSet.remove(currentRoute!!)
+            navBackTo = tabSet.lastOrNull()
+        }
         if (navBackTo != null) {
             navigate(navBackTo.route) {
                 popUpTo(firstTab.route) {
@@ -78,6 +85,9 @@ private fun NavHostController.popBackStackSmart(firstTab: LeafScreen) {
                 launchSingleTop = true
                 restoreState = true
             }
+            true
+        } else {
+            popBackStack()
         }
     } else {
         popBackStack()

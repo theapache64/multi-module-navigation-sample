@@ -16,7 +16,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeAndroidTemplateTheme {
                 Surface {
-                    MainScreen()
+                    MainScreen(
+                        onBackNavigation = {
+                            finish()
+                        }
+                    )
                 }
             }
         }
