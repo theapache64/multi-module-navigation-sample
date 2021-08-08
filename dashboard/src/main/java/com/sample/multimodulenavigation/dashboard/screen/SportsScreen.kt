@@ -3,7 +3,6 @@ package com.sample.multimodulenavigation.dashboard.screen
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 
 @Composable
 fun SportsScreen(

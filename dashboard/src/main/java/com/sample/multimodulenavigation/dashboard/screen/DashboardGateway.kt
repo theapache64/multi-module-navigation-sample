@@ -31,7 +31,7 @@ import javax.inject.Inject
 @Composable
 fun DashboardGatewayScreen(
     viewModel: DashboardGatewayViewModel = hiltViewModel(),
-    onTabsChanged: (List<Tab>) -> Unit
+    onTabsLoaded: (List<Tab>) -> Unit
 ) {
     val tabs by viewModel.tabs.collectAsState()
 
@@ -47,7 +47,7 @@ fun DashboardGatewayScreen(
                 GatewayLoading()
             }
             is Resource.Success -> {
-                onTabsChanged((tabs as Resource.Success<List<Tab>>).data)
+                onTabsLoaded((tabs as Resource.Success<List<Tab>>).data)
             }
             is Resource.Error -> {
                 Text(text = "Something went wrong")

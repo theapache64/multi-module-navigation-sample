@@ -13,7 +13,7 @@ import com.sample.multimodulenavigation.dashboard.screen.*
 fun NavGraphBuilder.addDashboardNavGraph(
     route: String,
     navController: NavController,
-    onTabsChanged: (List<Tab>) -> Unit,
+    onTabsLoaded: (List<Tab>) -> Unit,
     onTabsVisibilityChanged: (Boolean) -> Unit
 ) {
 
@@ -31,8 +31,15 @@ fun NavGraphBuilder.addDashboardNavGraph(
     navigation(route = route, startDestination = LeafScreen.DashboardGateway.route) {
         composable(LeafScreen.DashboardGateway.route) {
             DashboardGatewayScreen(
-                onTabsChanged = { tabs ->
-                    onTabsChanged(tabs)
+                onTabsLoaded = { tabs ->
+                    onTabsLoaded(tabs)
+
+                    // Go to first tab
+                    navController.navigate(tabs.first().findScreen().route) {
+                        // remove up to gateway since we've data loaded
+                        popUpTo(LeafScreen.DashboardGateway.route) { inclusive = true }
+                    }
+
                     onTabsVisibilityChanged(true)
                 }
             )

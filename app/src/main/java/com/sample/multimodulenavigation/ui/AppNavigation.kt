@@ -14,7 +14,7 @@ import com.sample.multimodulenavigation.ui.screen.splash.SplashScreen
 @Composable
 fun AppNavigation(
     navController: NavHostController,
-    onTabsChanged: (List<Tab>) -> Unit,
+    onTabsLoaded: (List<Tab>) -> Unit,
     onTabsVisibilityChanged: (Boolean) -> Unit,
 ) {
 
@@ -37,7 +37,7 @@ fun AppNavigation(
 
         addDashboardNavGraph(
             route = Screen.Dashboard.route,
-            onTabsChanged = onTabsChanged,
+            onTabsLoaded = onTabsLoaded,
             onTabsVisibilityChanged = onTabsVisibilityChanged,
             navController = navController
         )

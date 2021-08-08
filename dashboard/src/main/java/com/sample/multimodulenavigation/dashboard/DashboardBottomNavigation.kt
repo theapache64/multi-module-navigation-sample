@@ -6,7 +6,9 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
+import com.sample.multimodulenavigation.commoncore.TabSet
 
+val tabSet = TabSet()
 
 @Composable
 fun DashboardBottomNavigation(
@@ -18,7 +20,9 @@ fun DashboardBottomNavigation(
             BottomNavigationItem(
                 selected = false, // TODO:
                 onClick = {
-                    navController.navigate(tab.findScreen().route) {
+                    val nextTab = tab.findScreen()
+                    tabSet.add(nextTab)
+                    navController.navigate(nextTab.route) {
                         popUpTo(tabs.first().findScreen().route) {
                             saveState = true
                         }
