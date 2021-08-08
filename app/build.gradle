@@ -65,7 +65,7 @@ dependencies {
 
     implementation project(":auth")
     implementation project(":dashboard")
-    implementation project(":common-utils")
+    implementation project(":common")
 
     // Test
     testImplementation 'junit:junit:4.13.2'

@@ -10,4 +10,4 @@ rootProject.name = "MultiModuleNavigationSample"
 include ':app'
 include ':auth'
 include ':dashboard'
-include ':common-utils'
+include ':common'

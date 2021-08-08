@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.sample.multimodulenavigation.auth.addAuthNavGraph
-import com.sample.multimodulenavigation.commonutils.Screen
+import com.sample.multimodulenavigation.common.Screen
 import com.sample.multimodulenavigation.dashboard.Tab
 import com.sample.multimodulenavigation.dashboard.addDashboardNavGraph
 import com.sample.multimodulenavigation.ui.screen.splash.SplashScreen
