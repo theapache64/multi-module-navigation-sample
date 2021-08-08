@@ -1,16 +1,8 @@
-![](cover.jpeg)
+# MultiModuleNavigationSample
 
-# compose-android-template
+![](https://i.imgur.com/LfHB9to.png)
 
-![buildStatus](https://img.shields.io/github/workflow/status/theapache64/compose-android-template/Java%20CI%20with%20Gradle?style=plastic)
-![latestVersion](https://img.shields.io/github/v/release/theapache64/compose-android-template)
-<a href="https://twitter.com/theapache64" target="_blank">
-<img alt="Twitter: theapache64" src="https://img.shields.io/twitter/follow/theapache64.svg?style=social" />
-</a>
-
-> An Android project template with MVVM, Hilt, Navigation and Compose
-
-## ✍️ Author
+<!-- ## ✍️ Author
 
 👤 **theapache64**
 
@@ -47,7 +39,7 @@ Give a ⭐️ if this project helped you!
 
 ## ☑️ TODO
 
-- [x] Integrate with [create-compose-app](https://github.com/theapache64/create-compose-app)
+- [x] Integrate with [create-compose-app](https://github.com/theapache64/create-compose-app) -->
 
 ## 📝 License
 
