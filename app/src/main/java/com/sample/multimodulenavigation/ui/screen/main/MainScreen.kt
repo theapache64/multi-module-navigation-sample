@@ -29,7 +29,10 @@ fun MainScreen(
 
     navController.enableOnBackPressed(false)
     BackHandler {
-        Log.d(TAG, "MainScreen: Back clicked")
+        Log.d(
+            TAG,
+            "MainScreen: Back clicked: ${navController.backQueue.size} -> ${navController.previousBackStackEntry?.destination}"
+        )
         if (!navController.popBackStackSmart(tabs.firstOrNull()?.findLeafScreen())) {
             Log.d(TAG, "MainScreen: Navigation failed")
             onBackNavigation()
@@ -58,7 +61,7 @@ fun MainScreen(
 }
 
 private fun NavHostController.popBackStackSmart(firstTab: LeafScreen?): Boolean {
-    if (firstTab == null) {
+    if (firstTab == null || previousBackStackEntry == null) {
         return false
     }
 
