@@ -1,49 +1,39 @@
 package com.sample.multimodulenavigation.auth
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Button
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.sample.multimodulenavigation.commonutils.LeafScreen
+import com.sample.multimodulenavigation.commonutils.Screen
 
-@Composable
-fun LogInScreen(
-    onLogInSuccess: () -> Unit
+fun NavGraphBuilder.addAuthNavGraph(
+    route: String,
+    navController: NavController
 ) {
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize()
+    navigation(
+        route = route,
+        startDestination = LeafScreen.LogIn.route
     ) {
-        Button(
-            onClick = onLogInSuccess
-        ) {
-            Text("LOGIN")
+
+        // LogIn
+        composable(LeafScreen.LogIn.route) {
+            LogInScreen(
+                onLogInSuccess = {
+                    navController.navigate(LeafScreen.LogInSuccess.route)
+                }
+            )
         }
-    }
-}
 
-@Composable
-fun LogInSuccessScreen(
-    onGoToDashboardClicked: () -> Unit
-) {
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Text(text = "LOGIN SUCCESS!")
-        Button(
-            onClick = onGoToDashboardClicked
-        ) {
-            Text("GO TO DASHBOARD")
+        // LogInSuccess
+        composable(LeafScreen.LogInSuccess.route) {
+            LogInSuccessScreen(
+                onGoToDashboardClicked = {
+                    navController.navigate(Screen.Dashboard.route) {
+                        popUpTo(Screen.Auth.route) { inclusive = true }
+                    }
+                }
+            )
         }
     }
 }
