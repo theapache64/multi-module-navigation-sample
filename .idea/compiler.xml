@@ -5,6 +5,7 @@
       <module name="MultiModuleNavigationSample.app" target="11" />
       <module name="MultiModuleNavigationSample.auth" target="11" />
       <module name="MultiModuleNavigationSample.dashboard" target="11" />
+      <module name="MultiModuleNavigationSample.data" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
