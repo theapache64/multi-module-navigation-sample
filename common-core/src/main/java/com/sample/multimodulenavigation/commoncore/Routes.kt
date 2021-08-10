@@ -6,17 +6,19 @@ sealed class Screen(val route: String) {
     object Dashboard : Screen("dashboard_root")
 }
 
-sealed class LeafScreen(val route: String) {
-    object LogIn : LeafScreen("login")
-    object LogInSuccess : LeafScreen("login_success")
+sealed class AuthScreen(val route: String) {
+    object LogIn : AuthScreen("login")
+    object LogInSuccess : AuthScreen("login_success")
+}
 
-    object DashboardGateway : LeafScreen("load_tabs")
-    object Home : LeafScreen("home")
-    object Tv : LeafScreen("tv")
-    object Movies : LeafScreen("movies")
-    object Sports : LeafScreen("sports")
+sealed class DashboardScreen(val route: String) {
+    object Gateway : DashboardScreen("load_tabs")
+    object Home : DashboardScreen("home")
+    object Tv : DashboardScreen("tv")
+    object Movies : DashboardScreen("movies")
+    object Sports : DashboardScreen("sports")
 
-    object Result : LeafScreen("result/{tabTitle}/{count}") {
+    object Result : DashboardScreen("result/{tabTitle}/{count}") {
         fun createRoute(tabTitle: String, count: Int) = "result/$tabTitle/$count"
     }
 }

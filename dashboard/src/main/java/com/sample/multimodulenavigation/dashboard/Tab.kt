@@ -1,7 +1,7 @@
 package com.sample.multimodulenavigation.dashboard
 
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.sample.multimodulenavigation.commoncore.LeafScreen
+import com.sample.multimodulenavigation.commoncore.DashboardScreen
 
 data class Tab(
     val id: String,
@@ -10,12 +10,12 @@ data class Tab(
 )
 
 
-fun Tab.findLeafScreen(): LeafScreen {
+fun Tab.findLeafScreen(): DashboardScreen {
     return when (id) {
-        LeafScreen.Home.route -> LeafScreen.Home
-        LeafScreen.Tv.route -> LeafScreen.Tv
-        LeafScreen.Movies.route -> LeafScreen.Movies
-        LeafScreen.Sports.route -> LeafScreen.Sports
+        DashboardScreen.Home.route -> DashboardScreen.Home
+        DashboardScreen.Tv.route -> DashboardScreen.Tv
+        DashboardScreen.Movies.route -> DashboardScreen.Movies
+        DashboardScreen.Sports.route -> DashboardScreen.Sports
         else -> throw IllegalArgumentException("Not screen defined for the tab $this")
     }
 }

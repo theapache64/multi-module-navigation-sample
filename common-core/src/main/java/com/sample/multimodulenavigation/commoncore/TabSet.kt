@@ -1,9 +1,9 @@
 package com.sample.multimodulenavigation.commoncore
 
 class TabSet {
-    private val tabs = mutableListOf<LeafScreen>()
+    private val tabs = mutableListOf<DashboardScreen>()
 
-    fun add(tabScreen: LeafScreen) {
+    fun add(tabScreen: DashboardScreen) {
         tabs.remove(tabScreen) // remove if exist
         tabs.add(tabScreen) // add to the end
     }
@@ -15,7 +15,7 @@ class TabSet {
         }
     }
 
-    fun lastOrNull(): LeafScreen? {
+    fun lastOrNull(): DashboardScreen? {
         return tabs.lastOrNull()
     }
 }

@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sample.multimodulenavigation.commoncore.LeafScreen
+import com.sample.multimodulenavigation.commoncore.DashboardScreen
 import com.sample.multimodulenavigation.commoncore.Resource
 import com.sample.multimodulenavigation.dashboard.Tab
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -83,10 +83,10 @@ class DashboardGatewayViewModel @Inject constructor() : ViewModel() {
             delay(2000)
             _tabs.value = Resource.Success(
                 listOf(
-                    Tab(LeafScreen.Home.route, "Home", Icons.Outlined.Home),
-                    Tab(LeafScreen.Tv.route, "Tv", Icons.Outlined.PlayArrow),
-                    Tab(LeafScreen.Movies.route, "Movies", Icons.Outlined.Star),
-                    Tab(LeafScreen.Sports.route, "Sports", Icons.Outlined.ThumbUp),
+                    Tab(DashboardScreen.Home.route, "Home", Icons.Outlined.Home),
+                    Tab(DashboardScreen.Tv.route, "Tv", Icons.Outlined.PlayArrow),
+                    Tab(DashboardScreen.Movies.route, "Movies", Icons.Outlined.Star),
+                    Tab(DashboardScreen.Sports.route, "Sports", Icons.Outlined.ThumbUp),
                 )
             )
         }

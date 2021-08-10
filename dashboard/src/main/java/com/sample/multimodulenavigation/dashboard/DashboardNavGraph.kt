@@ -6,7 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.navigation
-import com.sample.multimodulenavigation.commoncore.LeafScreen
+import com.sample.multimodulenavigation.commoncore.DashboardScreen
 import com.sample.multimodulenavigation.dashboard.screen.*
 
 
@@ -25,11 +25,11 @@ fun NavGraphBuilder.addDashboardNavGraph(
     }
 
     val onResult: (String, Int) -> Unit = { tabTitle, count ->
-        navController.navigate(LeafScreen.Result.createRoute(tabTitle, count))
+        navController.navigate(DashboardScreen.Result.createRoute(tabTitle, count))
     }
 
-    navigation(route = route, startDestination = LeafScreen.DashboardGateway.route) {
-        composable(LeafScreen.DashboardGateway.route) {
+    navigation(route = route, startDestination = DashboardScreen.Gateway.route) {
+        composable(DashboardScreen.Gateway.route) {
             DashboardGatewayScreen(
                 onTabsLoaded = { tabs ->
                     onTabsLoaded(tabs)
@@ -39,35 +39,35 @@ fun NavGraphBuilder.addDashboardNavGraph(
                     tabSet.add(leafScreen)
                     navController.navigate(leafScreen.route) {
                         // remove up to gateway since we've data loaded
-                        popUpTo(LeafScreen.DashboardGateway.route) { inclusive = true }
+                        popUpTo(DashboardScreen.Gateway.route) { inclusive = true }
                     }
 
                     onTabsVisibilityChanged(true)
                 }
             )
         }
-        composable(LeafScreen.Home.route) {
+        composable(DashboardScreen.Home.route) {
             HomeScreen(
                 onShowTabsClicked = onShowTabsClicked,
                 onHideTabsClicked = onHideTabsClicked,
                 onSubmit = onResult
             )
         }
-        composable(LeafScreen.Tv.route) {
+        composable(DashboardScreen.Tv.route) {
             TvScreen(
                 onShowTabsClicked = onShowTabsClicked,
                 onHideTabsClicked = onHideTabsClicked,
                 onSubmit = onResult
             )
         }
-        composable(LeafScreen.Movies.route) {
+        composable(DashboardScreen.Movies.route) {
             MoviesScreen(
                 onShowTabsClicked = onShowTabsClicked,
                 onHideTabsClicked = onHideTabsClicked,
                 onSubmit = onResult
             )
         }
-        composable(LeafScreen.Sports.route) {
+        composable(DashboardScreen.Sports.route) {
             SportsScreen(
                 onShowTabsClicked = onShowTabsClicked,
                 onHideTabsClicked = onHideTabsClicked,
@@ -76,7 +76,7 @@ fun NavGraphBuilder.addDashboardNavGraph(
         }
 
         composable(
-            route = LeafScreen.Result.route,
+            route = DashboardScreen.Result.route,
             arguments = listOf(
                 navArgument("count") {
                     type = NavType.IntType

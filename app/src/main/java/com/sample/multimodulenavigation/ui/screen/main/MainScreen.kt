@@ -9,7 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.sample.multimodulenavigation.commoncore.LeafScreen
+import com.sample.multimodulenavigation.commoncore.DashboardScreen
 import com.sample.multimodulenavigation.dashboard.DashboardBottomNavigation
 import com.sample.multimodulenavigation.dashboard.Tab
 import com.sample.multimodulenavigation.dashboard.findLeafScreen
@@ -29,13 +29,8 @@ fun MainScreen(
 
     navController.enableOnBackPressed(false)
     BackHandler {
-        Log.d(
-            TAG,
-            "MainScreen: Back clicked: ${navController.backQueue.size} -> ${navController.previousBackStackEntry?.destination}"
-        )
         if (!navController.popBackStackSmart(tabs.firstOrNull()?.findLeafScreen())) {
-            Log.d(TAG, "MainScreen: Navigation failed")
-            onBackNavigation()
+            onBackNavigation() // TODO: This is not the right way. Needs to improve
         }
     }
 
@@ -60,17 +55,17 @@ fun MainScreen(
     }
 }
 
-private fun NavHostController.popBackStackSmart(firstTab: LeafScreen?): Boolean {
+private fun NavHostController.popBackStackSmart(firstTab: DashboardScreen?): Boolean {
     if (firstTab == null || previousBackStackEntry == null) {
         return false
     }
 
     val currentRoute = currentBackStackEntry?.destination?.route
     val isTab = when (currentRoute) {
-        LeafScreen.Home.route,
-        LeafScreen.Tv.route,
-        LeafScreen.Movies.route,
-        LeafScreen.Sports.route -> true
+        DashboardScreen.Home.route,
+        DashboardScreen.Tv.route,
+        DashboardScreen.Movies.route,
+        DashboardScreen.Sports.route -> true
         else -> false
     }
     return if (isTab) {
