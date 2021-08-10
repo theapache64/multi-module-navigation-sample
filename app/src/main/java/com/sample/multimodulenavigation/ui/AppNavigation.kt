@@ -24,8 +24,11 @@ fun AppNavigation(
         composable(Screen.Splash.route) {
             SplashScreen(
                 onSplashFinished = {
-                    navController.popBackStack() // Remove splash from stack
-                    navController.navigate(Screen.Auth.route)
+                    navController.navigate(Screen.Auth.route) {
+                        popUpTo(Screen.Splash.route) {
+                            inclusive = true
+                        }
+                    }
                 }
             )
         }
