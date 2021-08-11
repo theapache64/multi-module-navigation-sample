@@ -40,7 +40,7 @@ fun AppNavigation(
 
         addDashboardNavGraph(
             route = Screen.Dashboard.route,
-            onTabsLoaded = onTabsLoaded,
+            onBottomMenuLoaded = onTabsLoaded,
             onTabsVisibilityChanged = onTabsVisibilityChanged,
             navController = navController
         )

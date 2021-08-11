@@ -12,13 +12,13 @@ sealed class AuthScreen(val route: String) {
 }
 
 sealed class DashboardScreen(val route: String) {
-    object Gateway : DashboardScreen("load_tabs")
-    object Home : DashboardScreen("home")
-    object Tv : DashboardScreen("tv")
-    object Movies : DashboardScreen("movies")
-    object Sports : DashboardScreen("sports")
+    object Counter : DashboardScreen("counter")
 
     object Result : DashboardScreen("result/{tabTitle}/{count}") {
         fun createRoute(tabTitle: String, count: Int) = "result/$tabTitle/$count"
+    }
+
+    object Page : DashboardScreen("page/{pageId}") {
+        fun createRoute(pageId: String) = "page/$pageId"
     }
 }

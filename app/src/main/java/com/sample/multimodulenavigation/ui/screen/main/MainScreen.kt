@@ -1,19 +1,14 @@
 package com.sample.multimodulenavigation.ui.screen.main
 
-import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.sample.multimodulenavigation.commoncore.DashboardScreen
 import com.sample.multimodulenavigation.dashboard.DashboardBottomNavigation
 import com.sample.multimodulenavigation.dashboard.Tab
-import com.sample.multimodulenavigation.dashboard.findLeafScreen
-import com.sample.multimodulenavigation.dashboard.tabSet
 import com.sample.multimodulenavigation.ui.AppNavigation
 
 const val TAG = "CustomLog"
@@ -27,12 +22,10 @@ fun MainScreen(
     var tabs by remember { mutableStateOf<List<Tab>>(listOf()) }
     var isTabsVisible by remember { mutableStateOf(false) }
 
-    navController.enableOnBackPressed(false)
+    /*navController.enableOnBackPressed(false)
     BackHandler {
-        if (!navController.popBackStackSmart(tabs.firstOrNull()?.findLeafScreen())) {
-            onBackNavigation() // TODO: This is not the right way. Needs to improve
-        }
-    }
+        onBackNavigation() // TODO:
+    }*/
 
     Scaffold(
         bottomBar = {
@@ -52,42 +45,5 @@ fun MainScreen(
                 }
             )
         }
-    }
-}
-
-private fun NavHostController.popBackStackSmart(firstTab: DashboardScreen?): Boolean {
-    if (firstTab == null || previousBackStackEntry == null) {
-        return false
-    }
-
-    val currentRoute = currentBackStackEntry?.destination?.route
-    val isTab = when (currentRoute) {
-        DashboardScreen.Home.route,
-        DashboardScreen.Tv.route,
-        DashboardScreen.Movies.route,
-        DashboardScreen.Sports.route -> true
-        else -> false
-    }
-    return if (isTab) {
-        var navBackTo = tabSet.lastOrNull()
-        if (navBackTo?.route == currentRoute) {
-            tabSet.remove(currentRoute!!)
-            navBackTo = tabSet.lastOrNull()
-        }
-        if (navBackTo != null) {
-            navigate(navBackTo.route) {
-                popUpTo(firstTab.route) {
-                    saveState = true
-                }
-
-                launchSingleTop = true
-                restoreState = true
-            }
-            true
-        } else {
-            popBackStack()
-        }
-    } else {
-        popBackStack()
     }
 }

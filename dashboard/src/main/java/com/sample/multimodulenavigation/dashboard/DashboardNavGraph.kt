@@ -1,5 +1,6 @@
 package com.sample.multimodulenavigation.dashboard
 
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
@@ -13,7 +14,7 @@ import com.sample.multimodulenavigation.dashboard.screen.*
 fun NavGraphBuilder.addDashboardNavGraph(
     route: String,
     navController: NavController,
-    onTabsLoaded: (List<Tab>) -> Unit,
+    onBottomMenuLoaded: (List<Tab>) -> Unit,
     onTabsVisibilityChanged: (Boolean) -> Unit
 ) {
 
@@ -28,50 +29,31 @@ fun NavGraphBuilder.addDashboardNavGraph(
         navController.navigate(DashboardScreen.Result.createRoute(tabTitle, count))
     }
 
-    navigation(route = route, startDestination = DashboardScreen.Gateway.route) {
-        composable(DashboardScreen.Gateway.route) {
-            DashboardGatewayScreen(
-                onTabsLoaded = { tabs ->
-                    onTabsLoaded(tabs)
+    navigation(route = route, startDestination = DashboardScreen.Counter.route) {
 
-                    // Go to first tab
-                    val leafScreen = tabs.first().findLeafScreen()
-                    tabSet.add(leafScreen)
-                    navController.navigate(leafScreen.route) {
-                        // remove up to gateway since we've data loaded
-                        popUpTo(DashboardScreen.Gateway.route) { inclusive = true }
-                    }
+        composable(DashboardScreen.Counter.route) {
+            CounterScreen(
+                title = "Counter",
+                onShowTabsClicked = onShowTabsClicked,
+                onHideTabsClicked = onHideTabsClicked,
+                onSubmit = onResult
+            )
+        }
 
-                    onTabsVisibilityChanged(true)
+        composable(
+            route = DashboardScreen.Page.route,
+            arguments = listOf(
+                navArgument("pageId") {
+                    type = NavType.StringType
                 }
             )
-        }
-        composable(DashboardScreen.Home.route) {
-            HomeScreen(
-                onShowTabsClicked = onShowTabsClicked,
-                onHideTabsClicked = onHideTabsClicked,
-                onSubmit = onResult
-            )
-        }
-        composable(DashboardScreen.Tv.route) {
-            TvScreen(
-                onShowTabsClicked = onShowTabsClicked,
-                onHideTabsClicked = onHideTabsClicked,
-                onSubmit = onResult
-            )
-        }
-        composable(DashboardScreen.Movies.route) {
-            MoviesScreen(
-                onShowTabsClicked = onShowTabsClicked,
-                onHideTabsClicked = onHideTabsClicked,
-                onSubmit = onResult
-            )
-        }
-        composable(DashboardScreen.Sports.route) {
-            SportsScreen(
-                onShowTabsClicked = onShowTabsClicked,
-                onHideTabsClicked = onHideTabsClicked,
-                onSubmit = onResult
+        ) {
+            PageScreen(
+                viewModel = hiltViewModel(it),
+                onTabsLoaded = { tabs ->
+                    onBottomMenuLoaded(tabs)
+                    onTabsVisibilityChanged(true)
+                }
             )
         }
 

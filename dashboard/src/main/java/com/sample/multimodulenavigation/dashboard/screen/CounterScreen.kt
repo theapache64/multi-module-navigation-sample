@@ -20,61 +20,64 @@ import javax.inject.Inject
 
 
 @Composable
-fun Counter(
+fun CounterScreen(
     title: String,
     onShowTabsClicked: () -> Unit,
     onHideTabsClicked: () -> Unit,
     onSubmit: (String, Int) -> Unit,
-    modifier: Modifier = Modifier,
     viewModel: CounterViewModel = hiltViewModel()
 ) {
     val count by viewModel.count.collectAsState()
 
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
     ) {
-
-        Text(text = title, fontSize = 24.sp)
-        Spacer(modifier = Modifier.height(30.dp))
-
-        Row {
-            Button(onClick = { viewModel.onDecrementClicked() }) {
-                Text(text = "-")
-            }
-
-            Text(
-                text = "$count",
-                fontSize = 30.sp,
-                modifier = Modifier.padding(horizontal = 30.dp)
-            )
-
-            Button(onClick = { viewModel.onIncrementClicked() }) {
-                Text(text = "+")
-            }
-
-        }
-
-        Spacer(modifier = Modifier.height(30.dp))
-
-        Button(
-            onClick = { onSubmit(title, count) },
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Text(text = "SUBMIT")
-        }
 
-        Spacer(modifier = Modifier.height(50.dp))
+            Text(text = title, fontSize = 24.sp)
+            Spacer(modifier = Modifier.height(30.dp))
 
-        Row {
-            Button(onClick = { onShowTabsClicked() }) {
-                Text(text = "SHOW TABS")
+            Row {
+                Button(onClick = { viewModel.onDecrementClicked() }) {
+                    Text(text = "-")
+                }
+
+                Text(
+                    text = "$count",
+                    fontSize = 30.sp,
+                    modifier = Modifier.padding(horizontal = 30.dp)
+                )
+
+                Button(onClick = { viewModel.onIncrementClicked() }) {
+                    Text(text = "+")
+                }
+
             }
 
-            Spacer(modifier = Modifier.width(20.dp))
+            Spacer(modifier = Modifier.height(30.dp))
 
-            Button(onClick = { onHideTabsClicked() }) {
-                Text(text = "HIDE TABS")
+            Button(
+                onClick = { onSubmit(title, count) },
+            ) {
+                Text(text = "SUBMIT")
+            }
+
+            Spacer(modifier = Modifier.height(50.dp))
+
+            Row {
+                Button(onClick = { onShowTabsClicked() }) {
+                    Text(text = "SHOW TABS")
+                }
+
+                Spacer(modifier = Modifier.width(20.dp))
+
+                Button(onClick = { onHideTabsClicked() }) {
+                    Text(text = "HIDE TABS")
+                }
             }
         }
     }

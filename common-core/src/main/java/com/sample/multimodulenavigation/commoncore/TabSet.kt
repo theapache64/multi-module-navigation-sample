@@ -1,21 +1,25 @@
 package com.sample.multimodulenavigation.commoncore
 
 class TabSet {
-    private val tabs = mutableListOf<DashboardScreen>()
+    private val tabs = mutableListOf<String>()
 
-    fun add(tabScreen: DashboardScreen) {
-        tabs.remove(tabScreen) // remove if exist
-        tabs.add(tabScreen) // add to the end
+    fun bringToFront(tabId: String) {
+        tabs.remove(tabId) // remove if exist
+        tabs.add(tabId) // add to the end
     }
 
-    fun remove(route: String) {
-        val index = tabs.indexOfFirst { it.route == route }
+    fun remove(tabId: String) {
+        val index = tabs.indexOfFirst { it == tabId }
         if (index != -1) {
             tabs.removeAt(index)
         }
     }
 
-    fun lastOrNull(): DashboardScreen? {
+    fun lastOrNull(): String? {
         return tabs.lastOrNull()
+    }
+
+    fun contains(tabId: String): Boolean {
+        return tabs.indexOfFirst { it == tabId } != -1
     }
 }

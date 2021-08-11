@@ -56,7 +56,7 @@ data class WidgetItem<T : WidgetItemData>(
 
 data class TabData(
     val id: String,
-    val pageId: String,
+    val pageId: String?,
     val title: String
 ) : WidgetItemData()
 

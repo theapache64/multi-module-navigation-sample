@@ -7,8 +7,9 @@ import javax.inject.Inject
 class BffRepo @Inject constructor() {
 
     companion object {
-        private const val SPACE_TYPE_TRAY = "tray"
-        private const val SPACE_TYPE_BOTTOM_NAVIGATION = "bottom_navigation"
+        const val SPACE_TYPE_TRAY = "tray"
+        const val SPACE_TYPE_BOTTOM_NAVIGATION = "bottom_navigation"
+        const val WIDGET_ITEM_NORMAL_POSTER = "normal_poster"
     }
 
     suspend fun getPage(pageId: String): BffResponse {
@@ -51,18 +52,30 @@ class BffRepo @Inject constructor() {
 
     private fun createMenuItems(): List<WidgetItem<TabData>> {
         return mutableListOf<WidgetItem<TabData>>().apply {
-            repeat(5) { idx ->
+            repeat(3) { idx ->
                 add(
                     WidgetItem(
                         template = Template("tab_item", version = "1.0.0"),
                         data = TabData(
-                            "tab_$idx",
-                            "page_$idx",
-                            "Menu $idx"
+                            id = "tab_$idx",
+                            pageId = "page_$idx",
+                            title = "Page $idx"
                         )
                     )
                 )
             }
+
+            // add a static tab
+            add(
+                WidgetItem(
+                    template = Template("tab_item", version = "1.0.0"),
+                    data = TabData(
+                        id = "static_tab_counter",
+                        pageId = null,
+                        title = "Counter"
+                    )
+                )
+            )
         }
     }
 
@@ -84,8 +97,8 @@ class BffRepo @Inject constructor() {
             repeat(10) {
                 add(
                     Widget(
-                        template = Template("tab", version = "1.0.0"),
-                        data = null,
+                        template = Template("normal_poster", version = "1.0.0"),
+                        data = WidgetData("Widget $it"),
                         pagination = null,
                         widgetItems = createMovieWidgetItems()
                     )
@@ -101,7 +114,7 @@ class BffRepo @Inject constructor() {
                     WidgetItem<PosterData>(
                         template = Template("tab_item", version = "1.0.0"),
                         data = PosterData(
-                            "movies_$idx"
+                            "WidgetItem $idx"
                         )
                     )
                 )
