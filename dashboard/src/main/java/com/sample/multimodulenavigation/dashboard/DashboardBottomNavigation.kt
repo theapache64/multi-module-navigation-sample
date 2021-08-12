@@ -6,7 +6,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
-import com.sample.multimodulenavigation.commoncore.DashboardScreen
 import com.sample.multimodulenavigation.commoncore.TabSet
 
 val tabSet = TabSet()
@@ -22,15 +21,16 @@ fun DashboardBottomNavigation(
                 selected = false, // TODO:
                 onClick = {
 
-                    if (tab.pageId != null) {
+                    /*if (tab.pageId != null) {
                         // should load dynamic page
-                        navController.navigate(DashboardScreen.Page.createRoute(tab.pageId))
+                        val route = DashboardScreen.Page.createRoute(tab.pageId)
+                        navController.navigate(route)
                     } else {
                         // should load static page
                         navController.navigate(DashboardScreen.Counter.route)
                     }
 
-                    tabSet.bringToFront(tab.id)
+                    tabSet.bringToFront(tab.id)*/
                 },
                 label = { Text(tab.title) },
                 icon = { Icon(imageVector = tab.icon, contentDescription = "") }

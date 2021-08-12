@@ -22,4 +22,8 @@ class TabSet {
     fun contains(tabId: String): Boolean {
         return tabs.indexOfFirst { it == tabId } != -1
     }
+
+    override fun toString(): String {
+        return tabs.toString()
+    }
 }

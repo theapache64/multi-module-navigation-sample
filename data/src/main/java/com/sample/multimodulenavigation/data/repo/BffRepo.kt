@@ -9,6 +9,7 @@ class BffRepo @Inject constructor() {
     companion object {
         const val SPACE_TYPE_TRAY = "tray"
         const val SPACE_TYPE_BOTTOM_NAVIGATION = "bottom_navigation"
+        const val SPACE_TYPE_OVERLAY = "overlay"
         const val WIDGET_ITEM_NORMAL_POSTER = "normal_poster"
     }
 
@@ -22,8 +23,29 @@ class BffRepo @Inject constructor() {
                     pageType = "landing",
                     spaces = listOf(
                         createTraySpace(),
-                        createMenuSpace()
+                        createMenuSpace(),
+                        createOverlaySpace()
                     )
+                )
+            )
+        )
+    }
+
+    private fun createOverlaySpace(): Space {
+        return Space(
+            spaceId = "overlay_red",
+            spaceType = SPACE_TYPE_OVERLAY,
+            data = SpaceData(
+                nextPage = "/v1/pages/{page_id}/spaces/{space_id}?offset=10",
+                maxWidgets = 10,
+                minWidgets = 5
+            ),
+            widgets = listOf(
+                Widget(
+                    template = Template("tab", version = "1.0.0"),
+                    data = null,
+                    pagination = null,
+                    widgetItems = null
                 )
             )
         )

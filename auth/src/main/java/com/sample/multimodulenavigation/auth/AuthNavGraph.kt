@@ -4,9 +4,9 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.sample.multimodulenavigation.commoncore.AuthScreen
-import com.sample.multimodulenavigation.commoncore.DashboardScreen
-import com.sample.multimodulenavigation.commoncore.Screen
+import com.sample.multimodulenavigation.navigation.AuthScreen
+import com.sample.multimodulenavigation.navigation.DashboardScreen
+import com.sample.multimodulenavigation.navigation.Screen
 
 fun NavGraphBuilder.addAuthNavGraph(
     route: String,
@@ -18,7 +18,9 @@ fun NavGraphBuilder.addAuthNavGraph(
     ) {
 
         // LogIn
-        composable(AuthScreen.LogIn.route) {
+        composable(
+            route = AuthScreen.LogIn.route
+        ) {
             LogInScreen(
                 onLogInSuccess = {
                     navController.navigate(AuthScreen.LogInSuccess.route)
@@ -31,7 +33,7 @@ fun NavGraphBuilder.addAuthNavGraph(
             LogInSuccessScreen(
                 onGoToDashboardClicked = {
                     navController.navigate(DashboardScreen.Page.createRoute("page_0")) {
-                        popUpTo(Screen.Auth.route) { inclusive = true }
+                        popUpTo(Screen.AuthRoot.route) { inclusive = true }
                     }
                 }
             )

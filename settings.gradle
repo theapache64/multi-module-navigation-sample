@@ -6,9 +6,10 @@ dependencyResolutionManagement {
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
-rootProject.name = "MultiModuleNavigationSample"
+rootProject.name = "multi-module-navigation-sample"
 include ':app'
 include ':auth'
 include ':dashboard'
 include ':common-core'
 include ':data'
+include ':navigation'

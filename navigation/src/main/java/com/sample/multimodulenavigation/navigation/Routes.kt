@@ -1,9 +1,9 @@
-package com.sample.multimodulenavigation.commoncore
+package com.sample.multimodulenavigation.navigation
 
 sealed class Screen(val route: String) {
-    object Splash : Screen("splash_root")
-    object Auth : Screen("auth_root")
-    object Dashboard : Screen("dashboard_root")
+    object SplashRoot : Screen("splash_root")
+    object AuthRoot : Screen("auth_root")
+    object DashboardRoot : Screen("dashboard_root")
 }
 
 sealed class AuthScreen(val route: String) {

@@ -52,23 +52,35 @@ fun PageScreen(
                 Column {
                     Text(text = "PageId : '$pageId'", fontSize = 20.sp)
 
-                    for (space in (bffResponse as Resource.Success<BffResponse>).data.data.page.spaces) {
-                        when (space.spaceType) {
-                            BffRepo.SPACE_TYPE_TRAY -> {
-                                Tray(space.widgets)
-                            }
+                    Box {
 
-                            BffRepo.SPACE_TYPE_BOTTOM_NAVIGATION -> {
-                                val tabs = space.widgets[0].widgetItems!!.map {
-                                    val data = it.data as TabData
-                                    Tab(
-                                        data.id,
-                                        data.pageId,
-                                        data.title,
-                                        Icons.Outlined.Warning
+                        for (space in (bffResponse as Resource.Success<BffResponse>).data.data.page.spaces) {
+                            when (space.spaceType) {
+                                BffRepo.SPACE_TYPE_TRAY -> {
+                                    Tray(space.widgets)
+                                }
+
+                                BffRepo.SPACE_TYPE_OVERLAY -> {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(50.dp)
+                                            .background(Color.Red)
+                                            .align(Alignment.Center)
                                     )
                                 }
-                                onTabsLoaded(tabs)
+
+                                BffRepo.SPACE_TYPE_BOTTOM_NAVIGATION -> {
+                                    val tabs = space.widgets[0].widgetItems!!.map {
+                                        val data = it.data as TabData
+                                        Tab(
+                                            data.id,
+                                            data.pageId,
+                                            data.title,
+                                            Icons.Outlined.Warning
+                                        )
+                                    }
+                                    onTabsLoaded(tabs)
+                                }
                             }
                         }
                     }

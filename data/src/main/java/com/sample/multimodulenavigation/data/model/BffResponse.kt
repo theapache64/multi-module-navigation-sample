@@ -17,7 +17,7 @@ data class Page(
 data class Space(
     val spaceId: String,
     val spaceType: String,
-    val data: SpaceData,
+    val data: SpaceData? = null,
     val widgets: List<Widget>
 )
 
@@ -48,6 +48,10 @@ data class Pagination(
 )
 
 open class WidgetItemData
+
+data class Action(
+    val uri: String
+)
 
 data class WidgetItem<T : WidgetItemData>(
     val template: Template,

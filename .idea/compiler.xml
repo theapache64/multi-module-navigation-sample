@@ -2,6 +2,11 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
+      <module name="multi-module-navigation-sample.app" target="11" />
+      <module name="multi-module-navigation-sample.auth" target="11" />
+      <module name="multi-module-navigation-sample.dashboard" target="11" />
+      <module name="multi-module-navigation-sample.data" target="1.8" />
+      <module name="multi-module-navigation-sample.navigation" target="11" />
       <module name="MultiModuleNavigationSample.app" target="11" />
       <module name="MultiModuleNavigationSample.auth" target="11" />
       <module name="MultiModuleNavigationSample.dashboard" target="11" />

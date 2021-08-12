@@ -7,10 +7,10 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.navigation
-import com.sample.multimodulenavigation.commoncore.DashboardScreen
 import com.sample.multimodulenavigation.dashboard.screen.*
+import com.sample.multimodulenavigation.navigation.DashboardScreen
 
-
+// SnackBar API
 fun NavGraphBuilder.addDashboardNavGraph(
     route: String,
     navController: NavController,

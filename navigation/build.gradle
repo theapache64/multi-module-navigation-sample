@@ -28,13 +28,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-        useIR = true
-    }
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion compose_version
     }
 }
 
@@ -43,16 +36,12 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.4.0'
-
-    implementation project(":common-core")
-
-    implementation "androidx.compose.material:material:$compose_version"
-
-    // Navigation Compose Hilt Integration : Navigation Compose Hilt Integration
-    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0-alpha03'
-    implementation project(path: ':navigation')
-
-    testImplementation 'junit:junit:4.13.2'
+    implementation 'androidx.navigation:navigation-compose:2.4.0-alpha06'
+    implementation project(path: ':common-core')
+    testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    // Kotlinx Coroutines Core : Coroutines support libraries for Kotlin
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
 }
