@@ -6,23 +6,15 @@ import androidx.activity.compose.setContent
 import androidx.compose.material.Surface
 import com.sample.multimodulenavigation.navigation.NavigationManager
 import com.sample.multimodulenavigation.ui.screen.main.MainScreen
-import com.sample.multimodulenavigation.ui.screen.splash.SplashViewModel
 import com.sample.multimodulenavigation.ui.theme.ComposeAndroidTemplateTheme
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.components.ActivityComponent
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private var navigationManager = NavigationManager()
-
-    @EntryPoint
-    @InstallIn(ActivityComponent::class)
-    interface ViewModelFactoryProvider {
-        fun splashViewModelFactory(): SplashViewModel.Factory
-    }
+    @Inject
+    lateinit var navigationManager: NavigationManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

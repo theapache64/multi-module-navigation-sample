@@ -17,6 +17,7 @@ const val TAG = "CustomLog"
 fun MainScreen(
     navigationManager: NavigationManager
 ) {
+    println("Main Manager is $navigationManager")
     // States
     val navController = rememberNavController()
     var tabs by remember { mutableStateOf<List<Tab>>(listOf()) }
@@ -37,7 +38,6 @@ fun MainScreen(
         Box(modifier = Modifier.fillMaxSize()) {
             AppNavigation(
                 navController = navController,
-                navigationManager = navigationManager,
                 onTabsLoaded = { newTabs ->
                     tabs = newTabs
                 },
